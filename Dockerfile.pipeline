@@ -1,0 +1,22 @@
+# CUDA-enabled pipeline container for GPU inference
+FROM pytorch/pytorch:2.1.0-cuda12.1-cudnn8-runtime
+
+WORKDIR /app
+
+# Install system dependencies for OpenCV
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libgl1-mesa-glx libglib2.0-0 \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements.pipeline.txt .
+RUN pip install --no-cache-dir -r requirements.pipeline.txt
+
+COPY pipeline/ ./pipeline/
+COPY app/models.py ./app/models.py
+COPY app/__init__.py ./app/__init__.py
+COPY store_layout.json .
+
+# Download YOLOv8n weights on build
+RUN python -c "from ultralytics import YOLO; YOLO('yolov8n.pt')"
+
+CMD ["bash", "pipeline/run.sh"]
