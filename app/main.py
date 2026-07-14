@@ -1,6 +1,6 @@
 """
 Store Intelligence — FastAPI Application Factory
-
+ 
 Main entry point for the Intelligence API.
 Registers all routers, middleware, CORS, and lifespan events.
 """
