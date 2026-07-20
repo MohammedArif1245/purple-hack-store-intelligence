@@ -5,7 +5,7 @@ GET /health
 Service status, last event per store, stale feed detection.
 STALE_FEED if > 10 min lag per store.
 """
-
+ 
 from __future__ import annotations
 
 import logging
