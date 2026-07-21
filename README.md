@@ -22,7 +22,6 @@ python -m uvicorn app.main:app --reload --port 8000
 # 5. Start the Live Dashboard (in a new terminal)
 streamlit run dashboard/app.py
 ```
-
 ## Running via Docker (Production / Acceptance Gate)
 
 To run the full stack (PostgreSQL + Redis + API + Dashboard) via Docker:
